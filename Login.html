@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Farming - Login & Signup</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
+    body {
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      transition:0.4s;
+      background: url('https://static.vecteezy.com/system/resources/previews/029/337/848/large_2x/ai-generative-farmer-s-hands-over-farm-plants-realistic-image-ultra-hd-high-design-very-detailed-free-photo.jpg') no-repeat center center/cover;
+      position: relative;
+    }
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.55);
+      z-index: -1;
+    }
+    .container {
+      position: relative;
+      background: rgba(255,255,255,0.9);
+      padding:30px;
+      border-radius:15px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.3);
+      width:350px;
+      transition:0.3s;
+      z-index:1;
+    }
+    .container.dark { background: rgba(30,30,30,0.9); color:#f1f1f1; }
+    h2 { text-align:center; margin-bottom:20px; color:#2c3e50; }
+    .container.dark h2 { color:#f1f1f1; }
+    label { font-weight:bold; display:block; margin-bottom:6px; }
+    input { width:100%; padding:10px; margin-bottom:15px; border-radius:8px; border:1px solid #ccc; font-size:14px; transition:0.3s; }
+    input:focus { border-color:#27ae60; outline:none; box-shadow:0 0 6px rgba(39,174,96,0.5); }
+    button { width:100%; padding:12px; border:none; border-radius:8px; background:#27ae60; color:#fff; font-size:16px; cursor:pointer; transition:0.3s; }
+    button:hover { background:#219150; }
+    .toggle-link { text-align:center; margin-top:10px; cursor:pointer; color:#007bff; text-decoration:underline; }
+    .theme-toggle { margin-top:15px; text-align:center; }
+    .theme-toggle button { width:auto; background:#007bff; }
+    .container.dark input { background:#444; color:#fff; border:1px solid #666; }
+    .container.dark button { background:#1abc9c; }
+    .container.dark button:hover { background:#16a085; }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="container" id="formContainer">
+    <h2 id="formTitle">Login</h2>
+    <form id="authForm">
+      <!-- Login Fields -->
+      <div id="loginFields">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter password" required>
+
+        <button type="button">Login</button>
+      </div>
+
+      <!-- Signup Fields -->
+      <div id="signupFields" style="display:none;">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+
+        <label for="signupEmail">Email</label>
+        <input type="email" id="signupEmail" placeholder="Enter your email" required>
+
+        <label for="signupPassword">Password</label>
+        <input type="password" id="signupPassword" placeholder="Create password" required>
+
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm password" required>
+
+        <button type="button">Sign Up</button>
+      </div>
+    </form>
+
+    <div class="toggle-link" id="toggleLink">Don't have an account? Sign Up</div>
+    <div class="theme-toggle">
+      <button onclick="toggleTheme()">Switch Theme</button>
+    </div>
+  </div>
+
+  <script>
+    const formTitle = document.getElementById("formTitle");
+    const loginFields = document.getElementById("loginFields");
+    const signupFields = document.getElementById("signupFields");
+    const toggleLink = document.getElementById("toggleLink");
+    const formContainer = document.getElementById("formContainer");
+
+    // Switch between Login and Signup
+    toggleLink.addEventListener("click", () => {
+      if (loginFields.style.display !== "none") {
+        loginFields.style.display = "none";
+        signupFields.style.display = "block";
+        formTitle.textContent = "Sign Up";
+        toggleLink.textContent = "Already have an account? Login";
+      } else {
+        loginFields.style.display = "block";
+        signupFields.style.display = "none";
+        formTitle.textContent = "Login";
+        toggleLink.textContent = "Don't have an account? Sign Up";
+      }
+    });
+
+    // Theme switcher
+    function toggleTheme() {
+      formContainer.classList.toggle("dark");
+    }
+  </script>
+</body>
+</html>
