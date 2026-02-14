@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AgriTech Dashboard - Disease Prediction</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* Dashboard Layout */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f0f4f8;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 220px;
+      height: 100vh;
+      background-color: #2c3e50;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding-top: 30px;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #ecf0f1;
+      padding: 15px 25px;
+      text-decoration: none;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: #34495e;
+      border-left: 4px solid #28a745;
+    }
+
+    /* Main Content */
+    .main {
+      margin-left: 220px;
+      padding: 50px;
+    }
+
+    /* Form Styling */
+    .disease-form {
+      background-color: #ffffff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 400px;
+      margin: auto;
+    }
+
+    .disease-form h3 {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .disease-form input[type="file"] {
+      display: block;
+      margin: 20px auto;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .disease-form button {
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .disease-form button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <a href="dashboard.html"><i class="fa fa-home"></i> Dashboard</a>
+    <a href="disease_prediction.html"><i class="fa fa-leaf"></i> Disease Prediction</a>
+    <a href="#"><i class="fa fa-chart-line"></i> Analytics</a>
+    <a href="#"><i class="fa fa-cog"></i> Settings</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <div class="disease-form">
+      <h3>Disease Prediction</h3>
+      <form enctype="multipart/form-data" id="diseaseForm">
+        <label for="leafImage">Upload Leaf Image:</label>
+        <input type="file" id="leafImage" accept="image/*" required>
+        <br>
+        <button type="submit">Predict</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Handle form submission (user-defined logic can be added here)
+    document.getElementById('diseaseForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const fileInput = document.getElementById('leafImage');
+      if(fileInput.files.length > 0){
+        alert("File " + fileInput.files[0].name + " ready for prediction!");
+        // You can integrate backend API call here
+      } else {
+        alert("Please upload a leaf image.");
+      }
+    });
+  </script>
+
+</body>
+</html>
