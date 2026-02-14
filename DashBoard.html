@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AgriTech Farm Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+    body { display: flex; height: 100vh; background: #f4f6f8; }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background: #fff;
+      border-right: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 0;
+    }
+
+    .sidebar .logo {
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      margin-bottom: 30px;
+    }
+
+    .sidebar .logo img {
+      width: 35px;
+      margin-right: 10px;
+    }
+
+    .sidebar .logo span {
+      font-weight: bold;
+      font-size: 18px;
+      color: #2e7d32;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s;
+      border-radius: 6px;
+      margin: 4px 10px;
+    }
+
+    .sidebar nav a i {
+      margin-right: 12px;
+      font-size: 16px;
+      width: 20px;
+    }
+
+    .sidebar nav a:hover, .sidebar nav a.active {
+      background: #2e7d32;
+      color: #fff;
+    }
+
+    /* Main content */
+    .main-content {
+      flex: 1;
+      padding: 20px 30px;
+      overflow-y: auto;
+    }
+
+    .dashboard-cards {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      flex: 1;
+      min-width: 180px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card h4 {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 8px;
+    }
+
+    .card .value {
+      font-size: 24px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .card small {
+      color: green;
+      font-size: 12px;
+    }
+
+    .section {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .section .chart-card, .section .status-card {
+      flex: 1;
+      min-width: 300px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .status-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .status-item span.status {
+      background: #d4edda;
+      color: #155724;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="logo">
+      <span>AgriTech 🌱</span>
+    </div>
+    <nav>
+      <a href="#" class="active"><i class="fas fa-chart-line"></i> Dashboard</a>
+      <a href="#"><i class="fas fa-robot"></i> AI Advisory</a>
+      <a href="#"><i class="fas fa-wifi"></i> LoRa Sensors</a>
+      <a href="#"><i class="fas fa-leaf"></i> Disease Detection</a>
+      <a href="#"><i class="fas fa-notes-medical"></i> Meeting Notes</a>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <h2>Farm Dashboard</h2>
+    <p style="margin-bottom:20px; color:#555;">Real-time monitoring and analytics</p>
+
+    <!-- Metric Cards -->
+    <div class="dashboard-cards">
+      <div class="card">
+        <h4>Soil Moisture</h4>
+        <div class="value">66% <i class="fas fa-tint" style="color:#2e7d32;"></i></div>
+        <small>+2.1% from yesterday</small>
+      </div>
+      <div class="card">
+        <h4>Temperature</h4>
+        <div class="value">24.8°C <i class="fas fa-thermometer-half" style="color:#f39c12;"></i></div>
+        <small>-1.2% from yesterday</small>
+      </div>
+      <div class="card">
+        <h4>pH Level</h4>
+        <div class="value">6.8 <i class="fas fa-flask" style="color:#3498db;"></i></div>
+        <small>Optimal range</small>
+      </div>
+      <div class="card">
+        <h4>Active Sensors</h4>
+        <div class="value">2 <i class="fas fa-wifi" style="color:#2e7d32;"></i></div>
+        <small>All online</small>
+      </div>
+    </div>
+
+    <!-- Sections -->
+    <div class="section">
+      <!-- Environmental Chart -->
+      <div class="chart-card">
+        <h3>Environmental Conditions</h3>
+        <canvas id="envChart"></canvas>
+      </div>
+
+      <!-- Sensor Status -->
+      <div class="status-card">
+        <h3>Sensor Network Status</h3>
+        <div class="status-item">
+          <div>LR-001 <small>North Field, Zone A</small></div>
+          <span class="status">Online</span>
+        </div>
+        <div class="status-item">
+          <div>LR-002 <small>Greenhouse, Section B</small></div>
+          <span class="status">Online</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('envChart').getContext('2d');
+    const envChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+        datasets: [
+          {
+            label: 'Temperature (°C)',
+            data: [24, 25, 23, 24, 25, 26, 24.8],
+            borderColor: '#f39c12',
+            backgroundColor: 'rgba(243,156,18,0.1)',
+            fill: true,
+            tension: 0.4
+          },
+          {
+            label: 'Soil Moisture (%)',
+            data: [60, 62, 61, 63, 65, 66, 66],
+            borderColor: '#2e7d32',
+            backgroundColor: 'rgba(46,125,50,0.1)',
+            fill: true,
+            tension: 0.4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'top' } },
+        scales: {
+          y: { beginAtZero: false }
+        }
+      }
+    });
+  </script>
+</body>
+</html
