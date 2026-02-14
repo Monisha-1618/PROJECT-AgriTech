@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LoRa Sensor Data - AgriTech</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+    body { display:flex; min-height:100vh; background:#f4f6f8; }
+
+    /* Sidebar */
+    .sidebar { width:220px; background:#fff; border-right:1px solid #ddd; display:flex; flex-direction:column; padding:20px 0 0 0; }
+    .sidebar .logo { display:flex; align-items:center; padding:0 20px; margin-bottom:30px; }
+    .sidebar .logo span { font-weight:bold; font-size:18px; color:#2e7d32; }
+    .sidebar nav { flex-grow:1; }
+    .sidebar nav a { display:flex; align-items:center; padding:12px 20px; color:#333; text-decoration:none; font-size:14px; transition:0.3s; border-radius:6px; margin:4px 10px; }
+    .sidebar nav a i { margin-right:12px; font-size:16px; width:20px; }
+    .sidebar nav a:hover, .sidebar nav a.active { background:#2e7d32; color:#fff; }
+
+    /* User Profile */
+    .user-profile { padding:15px 20px; border-top:1px solid #eee; display:flex; align-items:center; justify-content:space-between; }
+    .user-profile .initials { width:30px; height:30px; background:#2e7d32; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:bold; margin-right:10px; }
+    .user-profile .info p { margin:0; line-height:1.3; }
+    .user-profile .info .name { font-weight:bold; font-size:13px; }
+    .user-profile .info .farm { font-size:11px; color:#777; }
+
+    /* Main Content */
+    .main-content { flex:1; padding:40px 30px; overflow-y:auto; }
+    .main-content h2 { font-size:24px; color:#333; }
+    .main-content .subtitle { color:#555; margin-top:5px; margin-bottom:30px; font-size:14px; }
+
+    /* Card */
+    .card { background:#fff; padding:30px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08); max-width:700px; margin:auto; }
+    .card h3 { font-size:18px; font-weight:600; color:#2e7d32; margin-bottom:25px; border-bottom:2px solid #2e7d32; padding-bottom:12px; display:flex; align-items:center; gap:10px; }
+    .card h3 i { font-size:20px; }
+
+    /* Form Styles */
+    form { display:flex; flex-direction:column; gap:20px; }
+    label { font-size:14px; font-weight:bold; color:#333; margin-bottom:5px; }
+    input[type="text"], input[type="number"], select {
+        padding:12px 15px; border:1px solid #ccc; border-radius:8px; font-size:14px; width:100%;
+        transition:0.3s; background:#fdfdfd;
+    }
+    input[type="text"]:focus, input[type="number"]:focus, select:focus { border-color:#2e7d32; outline:none; box-shadow:0 0 8px rgba(46,125,50,0.2); }
+
+    /* Icons inside input */
+    .input-group { position:relative; }
+    .input-group i { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:#777; }
+    .input-group input, .input-group select { padding-left:35px; }
+
+    /* Submit Button */
+    .submit-btn {
+        background:#2e7d32; color:#fff; border:none; padding:12px 30px; border-radius:8px; font-size:15px;
+        cursor:pointer; transition:0.3s; align-self:flex-start;
+    }
+    .submit-btn:hover { background:#218838; }
+
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <div class="logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="logo" style="width:35px;margin-right:10px;">
+        <span>AgriTech</span>
+    </div>
+    <nav>
+        <a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+        <a href="ai_advisory.html"><i class="fas fa-robot"></i> AI Advisory</a>
+        <a href="lora_sensors.html" class="active"><i class="fas fa-wifi"></i> LoRa Sensors</a>
+        <a href="disease_detection.html"><i class="fas fa-leaf"></i> Disease Detection</a>
+        <a href="meeting_notes.html"><i class="fas fa-notes-medical"></i> Meeting Notes</a>
+    </nav>
+    <div class="user-profile">
+        <div style="display:flex;align-items:center;">
+            <div class="initials">JF</div>
+            <div class="info">
+                <p class="name">John Farmer</p>
+                <p class="farm">Green Valley Farm</p>
+            </div>
+        </div>
+        <i class="fas fa-cog" style="color:#ccc;cursor:pointer;"></i>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <h2>LoRa Sensor Data Entry</h2>
+    <p class="subtitle">Input real-time sensor readings for AI analysis</p>
+
+    <div class="card">
+        <h3><i class="fas fa-wifi"></i> Sensor Data Form</h3>
+        <form>
+            <div class="input-group">
+                <i class="fas fa-network-wired"></i>
+                <input type="text" value="node-A" placeholder="Node ID">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-thermometer-half"></i>
+                <input type="number" value="28" placeholder="Temperature (°C)">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-tint"></i>
+                <input type="number" value="65" placeholder="Humidity (%)">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-seedling"></i>
+                <input type="number" value="45" placeholder="Soil Moisture (%)">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-water"></i>
+                <select>
+                    <option>0 (Dry)</option>
+                    <option>1 (Wet)</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-sun"></i>
+                <input type="number" value="1200" placeholder="Light (lux)">
+            </div>
+            <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Save Data</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
